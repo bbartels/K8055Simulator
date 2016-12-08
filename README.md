@@ -39,7 +39,7 @@ This code example is written in C#, but you can access this library as long as y
 
 The imports in the example below don't cover all the importable functions, please refer to here for a full view of the functions that can be imported!
 Or open the Vellemann API Reference mentioned above to find the correct signature for the functions and import them the same way as shown in the code example below.
-```C++
+```C#
 using System.Runtime.InteropServices;
 
 namespace K8055Demo
