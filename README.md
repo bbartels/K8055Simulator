@@ -3,7 +3,7 @@
 ### Synopsis
 
 This project allows you to develop for the K8055 without the need of having the physical device with you.
-This Simulator interfaces with your project the same way the regular K8055 does through unmanaged code calls. Making it very easy to change between the Simulator and the physical device. 
+This Simulator interfaces with your project the same way the regular K8055 does through unmanaged code calls, making it very easy to change between the Simulator and the physical device. 
 
 ### Motivation
 
@@ -79,7 +79,8 @@ So if you own a K8055 and you want to contribute to this project you can try to 
 ### Future
 
 While I have nothing concrete planned for the future I was thinking to maybe porting this to .NET Core and a third party cross platform UI library to make this project work with Mac and Linux. 
-Though I am holding off of this for now for multiple reasons, first of all I want to wait until the next version of .NET Core ships with .NET Standard 2.0 to make this project a little more future proof and second I am not sure if there is even any interest in having cross platform compatibility. 
+
+Though I am holding off of this for now for multiple reasons, first I want to wait until the next version of .NET Core ships with .NET Standard 2.0 to make this project a little more future proof and second I am not sure if there is even any interest in having cross platform compatibility. 
 
 If you have any concrete feature requests you can submit an Issue on this Github page and I'll look into potentially implementing it.
 
