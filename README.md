@@ -7,7 +7,7 @@ This Simulator interfaces with your project the same way the regular K8055 does 
 
 ### Motivation
 
-This project was initially created because of the enjoyment of developing with the K8055, but the lack of the actual device at home. So this Simulator allowed me to develop at home and use the same exact code on the actual device at school.
+This project was initially created because of my enjoyment developing with the K8055, but the lack of the actual device at home. So this Simulator allowed me to develop at home and use the same exact code on the actual device at school.
 
 ### Prerequisites
 
