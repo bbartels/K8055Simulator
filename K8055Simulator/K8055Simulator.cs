@@ -201,6 +201,7 @@ namespace K8055Simulator
         {
             _window?.Close();
             _k8055D.Connected = false;
+            _k8055D = null;
         }
 
         #endregion
@@ -527,7 +528,6 @@ namespace K8055Simulator
             internal int[] DebounceTime { get; } = new int[2];
      
             #endregion
-
 
             /// <summary>
             /// The default debounce time of 2ms is set.

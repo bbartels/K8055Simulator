@@ -165,7 +165,7 @@ namespace K8055Simulator
 
         private void K8055WindowClose(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //Application.Current.Shutdown();
+            K8055Sim.CloseDevice();
         }
     }
 }
