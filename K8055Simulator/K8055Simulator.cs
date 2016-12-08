@@ -21,7 +21,7 @@ namespace K8055Simulator
         [DllExport("CloseDevice", CallingConvention = CallingConvention.StdCall)]
         public static void CloseDevice()
         {
-            K8055Sim.CloseDevice();
+            K8055Sim.CloseDevice(true);
         }
 
         [DllExport("ReadAnalogChannel", CallingConvention = CallingConvention.StdCall)]
@@ -197,9 +197,9 @@ namespace K8055Simulator
         /// <summary>
         /// Closes communication with the K8055D card.
         /// </summary>
-        public static void CloseDevice()
+        public static void CloseDevice(bool closeWindow)
         {
-            _window?.Close();
+            if(closeWindow) _window?.Close();
             _k8055D.Connected = false;
             _k8055D = null;
         }
