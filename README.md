@@ -16,7 +16,7 @@ This project was initially created because of the enjoyment of developing with t
 
 ### Installation
 
-I have provided an already compiled Dynamic Link Library here. 
+I have provided an already compiled Dynamic Link Library [here](https://github.com/bbartels/K8055Simulator/releases/tag/1.0). 
 But if you prefer to build the library yourself I provided instructions below:
 
 Type the following in the Visual Studio Commandline (adjust paths accordingly):
@@ -76,8 +76,13 @@ And since I personally don't own the actual device I had to work with the offici
 
 So if you own a K8055 and you want to contribute to this project you can try to run some tests to ensure the project's integrity. If you find any issues with the code you can open up an issue or submit a pull-request. 
 
+### Future
+
+While I have nothing concrete planned for the future I was thinking to maybe porting this to .NET Core and a third party cross platform UI library to make this project work with Mac and Linux. 
+Though I am holding off of this for now for multiple reasons, first of all I want to wait until the next version of .NET Core ships with .NET Standard 2.0 to make this project a little more future proof and second I am not sure if there is even any interest in having cross platform compatibility. 
+
+If you have any concrete feature requests you can submit an Issue on this Github page and I'll look into potentially implementing it.
+
 ## License
 
 This project is licensed under the MIT License, for further information please refer to the LICENSE file in the projects root directory.
-
-
