@@ -1,6 +1,6 @@
 ﻿<!-- 
     This file is licensed under the MIT License.
-    Check the license.txt in the projects root for more information.
+    Check the LICENSE file in the projects root for more information.
 -->
 <Window x:Class="K8055Simulator.K8055Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

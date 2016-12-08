@@ -1,6 +1,6 @@
 ﻿/*
  * This file is licensed under the MIT License.
- * Check the license.txt in the projects root for more information.
+ * Check the LICENSE file in the projects root for more information.
  */
 using System;
 using System.Runtime.InteropServices;
@@ -160,12 +160,6 @@ namespace K8055Simulator
         public static int ReadAnalogOutputChannel(int Channel)
         {
             return K8055Sim.ReadAnalogOutputChannel(Channel);
-        }
-
-        [DllExport("IncreaseCounter", CallingConvention = CallingConvention.StdCall)]
-        public static void IncreaseCounter(int Counter)
-        {
-            K8055Sim.IncreaseCounter(Counter);
         }
 
         #endregion

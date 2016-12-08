@@ -1,6 +1,6 @@
 ﻿/*
  * This file is licensed under the MIT License.
- * Check the license.txt in the projects root for more information.
+ * Check the LICENSE file in the projects root for more information.
  */
 using System;
 using System.Collections.Generic;
