@@ -184,10 +184,10 @@ namespace K8055Simulator
         public static int OpenDevice(int cardAddress)
         {
             if (cardAddress < 0 || 3 < cardAddress) return -1;
+            _window?.Close();
             _k8055D = Cards[cardAddress];
             _k8055D.Connected = true;
 
-            _window?.Close();
             _window = new K8055Window(_k8055D);
             _window.Show();
 
@@ -200,6 +200,7 @@ namespace K8055Simulator
         public static void CloseDevice(bool closeWindow)
         {
             if(closeWindow) _window?.Close();
+            if (_k8055D == null) return;
             _k8055D.Connected = false;
             _k8055D = null;
         }
