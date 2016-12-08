@@ -218,7 +218,7 @@ namespace K8055Simulator
         {
             if (_k8055D == null || !_k8055D.Connected || channel < 1 || channel > 2)
             {
-                throw new ArgumentOutOfRangeException($"{nameof(channel)}");
+                throw new ArgumentException("Communication with K8055 was either already closed or channel number is invalid!");
             }
 
             double voltage = channel == 1 ? _k8055D.AnalogInputChannel[0] : _k8055D.AnalogInputChannel[1];
@@ -408,7 +408,7 @@ namespace K8055Simulator
         {
             if (_k8055D == null || !_k8055D.Connected || counterNr < 1 || 2 < counterNr)
             {
-                throw new ArgumentOutOfRangeException($"{nameof(counterNr)}");
+                throw new ArgumentException("Communication with K8055 was either already closed or CounterNr is invalid!");
             }
             return _k8055D.Counter[counterNr - 1];
         }
