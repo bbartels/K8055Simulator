@@ -482,12 +482,11 @@ namespace K8055Simulator
         }
 
         /// <summary>
-        /// Der Analoge Ausgang wird gelesen und zurückgegeben.
+        /// The voltage of the selected analog output is returned.
+        /// This method does not work with an actual K8055D board!
         /// </summary>
-        /// Funktioniert nicht mit dem echten K8055D!!!
-        /// <param name="channel"></param>
-        /// <returns>Ein Wert zwischen 0 und 255 der die Spannung im Bereich von 0V - 5V darstellt.
-        ///  Bei -1 ist der K8055D nicht verbunden oder dieser Ausgang existiert nicht.</returns>
+        /// <param name="channel">The channel to be read.</param>
+        /// <returns>A value between 0 and 255 which maps to the output voltage in channel0 (0 - 255).</returns>
         public static int ReadAnalogOutputChannel(int channel)
         {
             if (_k8055D == null || !_k8055D.Connected || channel < 1 || channel > 2) return -1;
@@ -495,10 +494,10 @@ namespace K8055Simulator
         }
 
         /// <summary>
-        /// Der Zähler wird um 1 erhöht.
-        /// Funktioniert nicht mit dem echten K8055D!!!
+        /// The counter increases by 1.
+        /// This method does not work with an actual K8055D board!
         /// </summary>
-        /// <param name="counter">Der Zähler der erhöht werden soll.</param>
+        /// <param name="counter">Der counter to be increased.</param>
         public static void IncreaseCounter(int counter)
         {
             _k8055D.Counter[counter - 1]++;
