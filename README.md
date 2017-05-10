@@ -2,6 +2,7 @@
 <p align="center">
   <img src="http://i.imgur.com/Bnu7URb.png" width="591"/>
 </p>
+<p align="center" style="font-size:12px">K8055 CAD Render Image by Nemanja Petkov <a href="https://grabcad.com/3d.cnc-1">here</a>.</p>
 
 ### Synopsis
 
