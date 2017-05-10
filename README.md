@@ -34,8 +34,9 @@ The project has been built to mimic the library that has been provided by the K8
 
 ### Demo
 
-You can download an already compiled test project on the releases tab, however if you prefer to compile it yourself, follow the instructions below.
+You can download an already compiled test project on the releases tab [here](), however if you prefer to compile it yourself, follow the instructions below.
 
+Type the following in the Visual Studio Commandline (may need to adjust path to nuget cli tool):
 ```cmd
 > git clone https://github.com/bbartels/K8055Test.git
 > msbuild.exe K8055Test\K8055Test.sln /p:Configuration=Release
@@ -46,7 +47,7 @@ You can download an already compiled test project on the releases tab, however i
 > K8055Test\K8055Test\bin\Release\K8055Test.exe
 ```
 
-You could also compile both solutions using Visual Studio directly. Make sure to copy the K8055D.dll that is created from the K8055Simulator solution in the same path as the K8055Test.exe.
+You could also compile both solutions using via Visual Studio directly. Make sure to copy the K8055D.dll that is created from the K8055Simulator solution in the same path as the K8055Test.exe.
 
 ### Code Example
 
