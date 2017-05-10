@@ -99,7 +99,7 @@
         </GroupBox>
         <Canvas Height="420" Width="689" Margin="88,0,-67,0">
             <Canvas.Background>
-                <!-- K8055 CAD Render Image by: https://grabcad.com/3d.cnc-1-->
+                <!-- K8055 CAD Render Image by Nemanja Petkov here: https://grabcad.com/3d.cnc-1 -->
                 <ImageBrush ImageSource="Resources/K8055Board.jpg" Stretch="Uniform"/>
             </Canvas.Background>
 
