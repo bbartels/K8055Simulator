@@ -19,14 +19,14 @@ This project was initially created because of my enjoyment developing with the K
 I have provided an already compiled Dynamic Link Library [here](https://github.com/bbartels/K8055Simulator/releases/tag/1.0). 
 But if you prefer to build the library yourself I provided instructions below:
 
-Type the following in the Visual Studio Commandline (adjust paths accordingly):
+Type the following in the Visual Studio Commandline (may need to adjust path to nuget cli tool):
 ```cmd
-> cd PATH_TO_K8055Simulator
-> msbuild K8055Simulator.sln
-> cd K8055Simulator\bin\Debug
-> copy K8055.dll PATH_TO_YOUR_SOLUTION
+> git clone https://github.com/bbartels/K8055Simulator.git
+> nuget.exe restore K8055Simulator\K8055Simulator.sln
+> msbuild K8055Simulator\K8055Simulator.sln /p:Configuration=Release
+> cd K8055Simulator\K8055Simulator\bin\Release
 ```
-Alternatively you can just open the K8055Simulator Solution in Visual Studio and compile it from there.
+Alternatively you can open the K8055Simulator.sln in Visual Studio and compile there.
 
 ### API Reference
 
