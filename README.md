@@ -1,4 +1,7 @@
 # K8055Simulator
+<p align="center">
+  <img src="http://i.imgur.com/Bnu7URb.png" width="591"/>
+</p>
 
 ### Synopsis
 
