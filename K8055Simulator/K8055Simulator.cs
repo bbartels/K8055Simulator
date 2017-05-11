@@ -12,122 +12,122 @@ namespace K8055Simulator
     {
         #region K8055Simulator Operations
 
-        [DllExport("OpenDevice", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static int OpenDevice(int CardAdress)
         {
             return K8055Sim.OpenDevice(CardAdress);
         }
 
-        [DllExport("CloseDevice", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void CloseDevice()
         {
             K8055Sim.CloseDevice(true);
         }
 
-        [DllExport("ReadAnalogChannel", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static int ReadAnalogChannel(int Channel)
         {
             return K8055Sim.ReadAnalogChannel(Channel);
         }
 
-        [DllExport("ReadAllAnalog", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void ReadAllAnalog(ref int Data1, ref int Data2)
         {
             K8055Sim.ReadAllAnalog(ref Data1, ref Data2);
         }
 
 
-        [DllExport("ClearAnalogChannel", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void ClearAnalogChannel(int Channel)
         {
             K8055Sim.ClearAnalogChannel(Channel);
         }
 
-        [DllExport("ClearAllAnalog", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void ClearAllAnalog()
         {
             K8055Sim.ClearAllAnalog();
         }
 
-        [DllExport("OutputAnalogChannel", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void OutputAnalogChannel(int Channel, int Data)
         {
             K8055Sim.OutputAnalogChannel(Channel, Data);
         }
 
-        [DllExport("OutputAllAnalog", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void OutputAllAnalog(int Data1, int Data2)
         {
             K8055Sim.OutputAllAnalog(Data1, Data2);
         }
 
-        [DllExport("SetAnalogChannel", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void SetAnalogChannel(int Channel)
         {
             K8055Sim.SetAnalogChannel(Channel);
         }
 
-        [DllExport("SetAllAnalog", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void SetAllAnalog()
         {
             K8055Sim.SetAllAnalog();
         }
 
-        [DllExport("ClearAllDigital", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void ClearAllDigital()
         {
             K8055Sim.ClearAllDigital();
         }
 
-        [DllExport("ClearDigitalChannel", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void ClearDigitalChannel(int Channel)
         {
             K8055Sim.ClearDigitalChannel(Channel);
         }
 
-        [DllExport("SetAllDigital", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void SetAllDigital()
         {
             K8055Sim.SetAllDigital();
         }
 
-        [DllExport("SetDigitalChannel", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void SetDigitalChannel(int Channel)
         {
             K8055Sim.SetDigitalChannel(Channel);
         }
 
-        [DllExport("WriteAllDigital", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void WriteAllDigital(int Data)
         {
             K8055Sim.WriteAllDigital(Data);
         }
 
-        [DllExport("ReadDigitalChannel", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static bool ReadDigitalChannel(int Channel)
         {
             return K8055Sim.ReadDigitalChannel(Channel);
         }
 
-        [DllExport("ReadAllDigital", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static int ReadAllDigital()
         {
             return K8055Sim.ReadAllDigital();
         }
 
-        [DllExport("ReadCounter", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static int ReadCounter(int CounterNr)
         {
             return K8055Sim.ReadCounter(CounterNr);
         }
 
-        [DllExport("ResetCounter", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void ResetCounter(int CounterNr)
         {
             K8055Sim.ResetCounter(CounterNr);
         }
 
-        [DllExport("SetCounterDebounceTime", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void SetCounterDebounceTime(int CounterNr, int DebounceTime)
         {
             K8055Sim.SetCounterDebounceTime(CounterNr, DebounceTime);
