@@ -26,7 +26,7 @@ But if you prefer to build the library yourself I provided instructions below:
 Type the following in the Visual Studio Commandline (may need to adjust path to nuget cli tool):
 ```cmd
 > git clone https://github.com/bbartels/K8055Simulator.git
-> nuget.exe restore K8055Simulator\K8055Simulator.sln
+> msbuild K8055Simulator\K8055Simulator.sln /t:restore
 > msbuild K8055Simulator\K8055Simulator.sln /p:Configuration=Release
 > cd K8055Simulator\K8055Simulator\bin\Release
 ```
@@ -42,12 +42,12 @@ You can download an already compiled demo project on the releases tab [here](htt
 
 However if you prefer to compile it yourself, follow the instructions below.
 
-Type the following in the Visual Studio Commandline (may need to adjust path to nuget cli tool):
+Type the following in the Visual Studio Commandline:
 ```cmd
 > git clone https://github.com/bbartels/K8055Test.git
 > msbuild.exe K8055Test\K8055Test.sln /p:Configuration=Release
 > git clone https://github.com/bbartels/K8055Simulator.git
-> nuget.exe restore K8055Simulator\K8055Simulator.sln
+> msbuild K8055Simulator\K8055Simulator.sln /t:restore
 > msbuild K8055Simulator\K8055Simulator.sln /p:Configuration=Release
 > move K8055Simulator\K8055Simulator\bin\Release\K8055D.dll K8055Test\K8055Test\bin\Release
 > K8055Test\K8055Test\bin\Release\K8055Test.exe
