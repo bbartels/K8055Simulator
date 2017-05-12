@@ -20,7 +20,7 @@ This project was initially created because of my enjoyment developing with the K
 
 ### Installation
 
-I have provided an already compiled Dynamic Link Library [here](https://github.com/bbartels/K8055Simulator/releases/tag/1.0). 
+I have provided an already compiled Dynamic Link Library [here](https://github.com/bbartels/K8055Simulator/releases). 
 But if you prefer to build the library yourself I provided instructions below:
 
 Type the following in the Visual Studio Commandline (may need to adjust path to nuget cli tool):
@@ -38,7 +38,7 @@ The project has been built to mimic the library that has been provided by the K8
 
 ### Demo
 
-You can download an already compiled demo project on the releases tab [here](https://github.com/bbartels/K8055Simulator/releases/tag/1.0) and the testing program [here](https://github.com/bbartels/K8055Test/releases/tag/1.0) make sure to put both binaries in the same directory and run the executable.
+You can download an already compiled demo project on the releases tab [here](https://github.com/bbartels/K8055Simulator/releases) and the testing program [here](https://github.com/bbartels/K8055Test/releases) make sure to put both binaries in the same directory and run the executable.
 
 However if you prefer to compile it yourself, follow the instructions below.
 
