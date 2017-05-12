@@ -36,7 +36,6 @@ namespace K8055Simulator
             K8055Sim.ReadAllAnalog(ref Data1, ref Data2);
         }
 
-
         [DllExport]
         public static void ClearAnalogChannel(int Channel)
         {
@@ -138,25 +137,25 @@ namespace K8055Simulator
         //The operations below are not available in the actual K8055Simulator, though can be used for simulation purposes
         #region K8055SimulationOperations
 
-        [DllExport("SetDigitalInputChannel", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void SetDigitalInputChannel(int Channel, bool Status)
         {
             K8055Sim.SetDigitalInputChannel(Channel, Status);
         }
 
-        [DllExport("ReadDigitalOutputChannel", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static bool ReadDigitalOutputChannel(int Channel)
         {
             return K8055Sim.ReadDigitalOutputChannel(Channel);
         }
 
-        [DllExport("SetAnalogInputChannel", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static void SetAnalogInputChannel(int Channel, int Data)
         {
             K8055Sim.SetAnalogInputChannel(Channel, Data);
         }
 
-        [DllExport("ReadAnalogOutputChannel", CallingConvention = CallingConvention.StdCall)]
+        [DllExport]
         public static int ReadAnalogOutputChannel(int Channel)
         {
             return K8055Sim.ReadAnalogOutputChannel(Channel);
