@@ -3,174 +3,17 @@
  * Check the LICENSE file in the projects root for more information.
  */
 using System;
-using System.Runtime.InteropServices;
-using RGiesecke.DllExport;
+using System.Linq;
 
 namespace K8055Simulator
 {
-    public static class K8055DllExport
-    {
-        #region K8055Simulator Operations
-
-        [DllExport]
-        public static int OpenDevice(int CardAdress)
-        {
-            return K8055Sim.OpenDevice(CardAdress);
-        }
-
-        [DllExport]
-        public static void CloseDevice()
-        {
-            K8055Sim.CloseDevice(true);
-        }
-
-        [DllExport]
-        public static int ReadAnalogChannel(int Channel)
-        {
-            return K8055Sim.ReadAnalogChannel(Channel);
-        }
-
-        [DllExport]
-        public static void ReadAllAnalog(ref int Data1, ref int Data2)
-        {
-            K8055Sim.ReadAllAnalog(ref Data1, ref Data2);
-        }
-
-        [DllExport]
-        public static void ClearAnalogChannel(int Channel)
-        {
-            K8055Sim.ClearAnalogChannel(Channel);
-        }
-
-        [DllExport]
-        public static void ClearAllAnalog()
-        {
-            K8055Sim.ClearAllAnalog();
-        }
-
-        [DllExport]
-        public static void OutputAnalogChannel(int Channel, int Data)
-        {
-            K8055Sim.OutputAnalogChannel(Channel, Data);
-        }
-
-        [DllExport]
-        public static void OutputAllAnalog(int Data1, int Data2)
-        {
-            K8055Sim.OutputAllAnalog(Data1, Data2);
-        }
-
-        [DllExport]
-        public static void SetAnalogChannel(int Channel)
-        {
-            K8055Sim.SetAnalogChannel(Channel);
-        }
-
-        [DllExport]
-        public static void SetAllAnalog()
-        {
-            K8055Sim.SetAllAnalog();
-        }
-
-        [DllExport]
-        public static void ClearAllDigital()
-        {
-            K8055Sim.ClearAllDigital();
-        }
-
-        [DllExport]
-        public static void ClearDigitalChannel(int Channel)
-        {
-            K8055Sim.ClearDigitalChannel(Channel);
-        }
-
-        [DllExport]
-        public static void SetAllDigital()
-        {
-            K8055Sim.SetAllDigital();
-        }
-
-        [DllExport]
-        public static void SetDigitalChannel(int Channel)
-        {
-            K8055Sim.SetDigitalChannel(Channel);
-        }
-
-        [DllExport]
-        public static void WriteAllDigital(int Data)
-        {
-            K8055Sim.WriteAllDigital(Data);
-        }
-
-        [DllExport]
-        public static bool ReadDigitalChannel(int Channel)
-        {
-            return K8055Sim.ReadDigitalChannel(Channel);
-        }
-
-        [DllExport]
-        public static int ReadAllDigital()
-        {
-            return K8055Sim.ReadAllDigital();
-        }
-
-        [DllExport]
-        public static int ReadCounter(int CounterNr)
-        {
-            return K8055Sim.ReadCounter(CounterNr);
-        }
-
-        [DllExport]
-        public static void ResetCounter(int CounterNr)
-        {
-            K8055Sim.ResetCounter(CounterNr);
-        }
-
-        [DllExport]
-        public static void SetCounterDebounceTime(int CounterNr, int DebounceTime)
-        {
-            K8055Sim.SetCounterDebounceTime(CounterNr, DebounceTime);
-        }
-
-        #endregion
-
-        //The operations below are not available in the actual K8055Simulator, though can be used for simulation purposes
-        #region K8055SimulationOperations
-
-        [DllExport]
-        public static void SetDigitalInputChannel(int Channel, bool Status)
-        {
-            K8055Sim.SetDigitalInputChannel(Channel, Status);
-        }
-
-        [DllExport]
-        public static bool ReadDigitalOutputChannel(int Channel)
-        {
-            return K8055Sim.ReadDigitalOutputChannel(Channel);
-        }
-
-        [DllExport]
-        public static void SetAnalogInputChannel(int Channel, int Data)
-        {
-            K8055Sim.SetAnalogInputChannel(Channel, Data);
-        }
-
-        [DllExport]
-        public static int ReadAnalogOutputChannel(int Channel)
-        {
-            return K8055Sim.ReadAnalogOutputChannel(Channel);
-        }
-
-        #endregion
-    }
-
     public static class K8055Sim
     {
         private static K8055Window _window;
         private static K8055D _k8055D;
         private static readonly K8055D[] Cards = { new K8055D(), new K8055D(), new K8055D(), new K8055D() };
 
-        #region CommunicationOperations
+        #region GeneralOperations
 
         /// <summary>
         /// Opens communication with the selected K8055D card.
@@ -180,15 +23,18 @@ namespace K8055Simulator
         /// This is used to distinguish multiple K8055D cards. 
         /// </param>
         /// <returns>If the communication succeeds the passed cardAddress will be returned, otherwise -1.</returns>
-        public static int OpenDevice(int cardAddress)
+        public static int OpenDevice(int cardAddress, bool showWindow)
         {
-            if (cardAddress < 0 || 3 < cardAddress) return -1;
+            if (cardAddress < 0 || 3 < cardAddress) { return -1; }
             _window?.Close();
             _k8055D = Cards[cardAddress];
             _k8055D.Connected = true;
 
-            _window = new K8055Window(_k8055D);
-            _window.Show();
+            if(showWindow)
+            {
+                _window = new K8055Window(_k8055D);
+                _window.Show();
+            }
 
             return cardAddress;
         }
@@ -198,8 +44,8 @@ namespace K8055Simulator
         /// </summary>
         public static void CloseDevice(bool closeWindow)
         {
-            if(closeWindow) _window?.Close();
-            if (_k8055D == null) return;
+            if (closeWindow) { _window?.Close(); }
+            if (_k8055D == null) { return; }
             _k8055D.Connected = false;
             _k8055D = null;
         }
@@ -220,9 +66,7 @@ namespace K8055Simulator
                 throw new ArgumentException("Communication with K8055 was either already closed or channel number is invalid!");
             }
 
-            double voltage = channel == 1 ? _k8055D.AnalogInputChannel[0] : _k8055D.AnalogInputChannel[1];
-
-            return (int)(voltage / 5 * 255);
+            return (int)(channel == 1 ? _k8055D.AnalogInputChannel[0] : _k8055D.AnalogInputChannel[1] * 51);
         }
 
         /// <summary>
@@ -265,8 +109,8 @@ namespace K8055Simulator
         /// <param name="data">A value between 0 and 255 which maps to the output voltage (0 - 255).</param>
         public static void OutputAnalogChannel(int channel, int data)
         {
-            if (_k8055D == null || !_k8055D.Connected || data < 0 || data > 255) return;
-            if (channel < 1 || channel > 2) return;
+            if (_k8055D == null || !_k8055D.Connected || data < 0 || data > 255) { return; }
+            if (channel < 1 || channel > 2) { return; }
             _k8055D.AnalogOutputChannel[channel - 1] = (double)data / 255 * 5;
         }
 
@@ -279,8 +123,8 @@ namespace K8055Simulator
         /// <param name="data2">A value between 0 and 255 which maps to the output voltage in channel0 (0 - 255).</param>
         public static void OutputAllAnalog(int data1, int data2)
         {
-            if (_k8055D == null || !_k8055D.Connected || data1 < 0 || 255 < data1 || 
-                                     data2 < 0 || 255 < data2) return;
+            if (_k8055D == null || !_k8055D.Connected ||
+                data1 < 0 || 255 < data1 || data2 < 0 || 255 < data2) { return; }
 
             _k8055D.AnalogOutputChannel[0] = (double)data1 / 255 * 5;
             _k8055D.AnalogOutputChannel[1] = (double)data2 / 255 * 5;
@@ -312,11 +156,8 @@ namespace K8055Simulator
         /// </summary>
         public static void ClearAllDigital()
         {
-            if (_k8055D == null || !_k8055D.Connected) return;
-            for (int i = 0; i < 8; i++)
-            {
-                _k8055D.DigitalOutputChannel[i] = false;
-            }
+            if (_k8055D == null || !_k8055D.Connected) { return; }
+            _k8055D.DigitalOutputChannel.Select(c => c = false);
         }
 
         /// <summary>
@@ -325,7 +166,7 @@ namespace K8055Simulator
         /// <param name="channel">The digital channel which should be set to OFF.</param>
         public static void ClearDigitalChannel(int channel)
         {
-            if (_k8055D == null || !_k8055D.Connected || channel < 1 || 8 < channel) return;
+            if (_k8055D == null || !_k8055D.Connected || channel < 1 || 8 < channel) { return; }
             _k8055D.DigitalOutputChannel[channel - 1] = false;
         }
 
@@ -334,11 +175,8 @@ namespace K8055Simulator
         /// </summary>
         public static void SetAllDigital()
         {
-            if (_k8055D == null || !_k8055D.Connected) return;
-            for (int i = 1; i < 9; i++)
-            {
-                _k8055D.DigitalOutputChannel[i] = true;
-            }
+            if (_k8055D == null || !_k8055D.Connected) { return; }
+            _k8055D.DigitalOutputChannel.Select(c => c = true);
         }
 
         /// <summary>
@@ -347,7 +185,7 @@ namespace K8055Simulator
         /// <param name="channel">The digital channel which should be set to 'ON'</param>
         public static void SetDigitalChannel(int channel)
         {
-            if (_k8055D == null || !_k8055D.Connected || channel < 1 || 8 < channel) return;
+            if (_k8055D == null || !_k8055D.Connected || channel < 1 || 8 < channel) { return; }
             _k8055D.DigitalOutputChannel[channel - 1] = true;
         }
         
@@ -358,13 +196,9 @@ namespace K8055Simulator
         /// <param name="data">The Integer which should be used to toggle the digital outputs.</param>
         public static void WriteAllDigital(int data)
         {
-            if (_k8055D == null || !_k8055D.Connected || data < 0 || data > 255) return;
+            if (_k8055D == null || !_k8055D.Connected || data < 0 || data > 255) { return; }
 
-            for (int i = 0; i < 8; i++)
-            {
-                _k8055D.DigitalOutputChannel[i] = (data & 1) == 1;
-                data >>= 1;
-            }
+            _k8055D.DigitalOutputChannel.Select((c, i) => c = ((data >>= 1) & 1) == 1);
         }
         #endregion
 
@@ -376,7 +210,7 @@ namespace K8055Simulator
         /// <returns>Whether the digital is 'ON'(true) or 'OFF'(false).</returns>
         public static bool ReadDigitalChannel(int channel)
         {
-            if (_k8055D == null || !_k8055D.Connected || channel < 1 || channel > 5) return false;
+            if (_k8055D == null || !_k8055D.Connected || channel < 1 || channel > 5) { return false; }
             return _k8055D.DigitalInputChannel[channel - 1];
         }
 
@@ -386,13 +220,8 @@ namespace K8055Simulator
         /// <returns>The first 5 bits starting from the least significant bit correspond to the state of the input channels</returns>
         public static int ReadAllDigital()
         {
-            if (_k8055D == null || !_k8055D.Connected) return -1;
-            int counter = 0;
-            for (int i = 0; i < 5; i++)
-            {
-                counter += _k8055D.DigitalInputChannel[i] ? Convert.ToInt32(1 * Math.Pow(2, i)) : 0;
-            }
-            return counter;
+            if (_k8055D == null || !_k8055D.Connected) { return -1; }
+            return _k8055D.DigitalInputChannel.Select((n, i) => n ? Convert.ToInt32(Math.Pow(2, i)) : 0).Sum();
         }
         #endregion
 
@@ -401,25 +230,25 @@ namespace K8055Simulator
         /// <summary>
         /// Reads and returns the state of the selected counter.
         /// </summary>
-        /// <param name="counterNr">The counter whose value should be read.</param>
+        /// <param name="counterNum">The counter whose value should be read.</param>
         /// <returns>A value between 0 and 65536 to correspond to the number of presses.</returns>
-        public static int ReadCounter(int counterNr)
+        public static int ReadCounter(int counterNum)
         {
-            if (_k8055D == null || !_k8055D.Connected || counterNr < 1 || 2 < counterNr)
+            if (_k8055D == null || !_k8055D.Connected || counterNum < 1 || 2 < counterNum)
             {
-                throw new ArgumentException("Communication with K8055 was either already closed or CounterNr is invalid!");
+                throw new ArgumentException($"Communication with K8055 was either already closed or { nameof(counterNum) } is invalid!");
             }
-            return _k8055D.Counter[counterNr - 1];
+            return _k8055D.Counter[counterNum - 1];
         }
 
         /// <summary>
         /// The selected counter is reset to 0.
         /// </summary>
-        /// <param name="counterNr">The counter whose state should be reset.</param>
-        public static void ResetCounter(int counterNr)
+        /// <param name="counterNum">The counter whose state should be reset.</param>
+        public static void ResetCounter(int counterNum)
         {
-            if (_k8055D == null || !_k8055D.Connected || counterNr < 1 || counterNr > 2) return;
-            _k8055D.Counter[counterNr - 1] = 0;
+            if (_k8055D == null || !_k8055D.Connected || counterNum < 1 || counterNum > 2) { return; }
+            _k8055D.Counter[counterNum - 1] = 0;
         }
 
         /// <summary>
@@ -428,15 +257,16 @@ namespace K8055Simulator
         /// which means that the input has to be 'ON' for the time of the current debounce time
         /// to register it as a valid press.
         /// </summary>
-        /// <param name="counterNr">The counter whose debounce time should be set.</param>
+        /// <param name="counterNum">The counter whose debounce time should be set.</param>
         /// <param name="debounceTime">
         /// The value to be set to the debounce time (in milliseconds) can range from 0 to 5000.
         /// </param>
-        public static void SetCounterDebounceTime(int counterNr, int debounceTime)
+        public static void SetCounterDebounceTime(int counterNum, int debounceTime)
         {
-            if (_k8055D == null || !_k8055D.Connected || counterNr < 1 || debounceTime < 0   ||
-                                                         2 < counterNr || 5000 < debounceTime) return;
-            _k8055D.DebounceTime[counterNr - 1] = debounceTime;
+            if (_k8055D == null || !_k8055D.Connected) { return; }
+            if(counterNum < 1 || debounceTime < 0 || 2 < counterNum || 5000 < debounceTime) { return; }
+
+            _k8055D.DebounceTime[counterNum - 1] = debounceTime;
         }
 
         #endregion
@@ -452,7 +282,7 @@ namespace K8055Simulator
         /// <param name="status">The state to which the digital input should be set.</param>
         public static void SetDigitalInputChannel(int channel, bool status)
         {
-            if (_k8055D == null || !_k8055D.Connected || channel < 1 || channel > 5) return;
+            if (_k8055D == null || !_k8055D.Connected || channel < 1 || channel > 5) { return; }
             _k8055D.DigitalInputChannel[channel - 1] = status;
         }
 
@@ -464,7 +294,7 @@ namespace K8055Simulator
         /// <returns>The state of the selected digital output.</returns>
         public static bool ReadDigitalOutputChannel(int channel)
         {
-            if (_k8055D == null || !_k8055D.Connected || channel < 1 || 8 < channel) return false;
+            if (_k8055D == null || !_k8055D.Connected || channel < 1 || 8 < channel) { return false; }
             return _k8055D.DigitalOutputChannel[channel - 1];
         }
 
@@ -476,7 +306,7 @@ namespace K8055Simulator
         /// <param name="data">A value between 0 and 255 to represent the voltage (0 - 5V)</param>
         public static void SetAnalogInputChannel(int channel, int data)
         {
-            if (_k8055D == null || !_k8055D.Connected || channel < 1 || 2 < channel) return;
+            if (_k8055D == null || !_k8055D.Connected || channel < 1 || 2 < channel) { return; }
             _k8055D.AnalogInputChannel[channel - 1] = (double)data * 5 / 255;
         }
 
@@ -488,7 +318,7 @@ namespace K8055Simulator
         /// <returns>A value between 0 and 255 which maps to the output voltage in channel0 (0 - 255).</returns>
         public static int ReadAnalogOutputChannel(int channel)
         {
-            if (_k8055D == null || !_k8055D.Connected || channel < 1 || channel > 2) return -1;
+            if (_k8055D == null || !_k8055D.Connected || channel < 1 || channel > 2) { return -1; }
             return (int)(_k8055D.AnalogOutputChannel[channel - 1] / 5 * 255);
         }
 
